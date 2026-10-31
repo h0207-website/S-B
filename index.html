@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salon de Beauty — Tassoust, Jijel</title>
+<meta name="description" content="Salon de Beauty à Tassoust, Jijel : soins du visage, extensions de cils, soins capillaires, microblading. Réservez en ligne.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FDFBFA;--bg2:#F4E9E8;--bg3:#E8DDE5;--tx:#4a4146;--mu:#82777C;--card:#FFFFFF;--line:rgba(130,119,124,.25);--gold:#C9A400;--ease:cubic-bezier(.22,.8,.3,1)}
+[data-theme=dark]{--bg:#1d1a1e;--bg2:#27222a;--bg3:#322a37;--tx:#f1e8ec;--mu:#b9acb2;--card:#2a252d;--line:rgba(232,221,229,.18)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font:300 16px/1.7 Jost,Tajawal,sans-serif;transition:background .5s,color .5s}
+[dir=rtl] body{font-family:Tajawal,Jost,sans-serif}
+h1,h2,h3{font-family:'Cormorant Garamond',Tajawal,serif;font-weight:400;line-height:1.1}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--mu);outline-offset:3px}
+.wrap{max-width:1120px;margin:auto;padding:0 24px}
+section{padding:110px 0}
+.eyebrow{letter-spacing:.3em;font-size:12px;text-transform:uppercase;color:var(--mu);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.eyebrow:before{content:"";width:34px;height:1px;background:var(--gold)}
+h2{font-size:clamp(34px,5vw,58px);margin-bottom:24px}h2 em{font-style:italic;color:var(--mu)}
+/* loader */
+#loader{position:fixed;inset:0;background:var(--bg);display:grid;place-items:center;z-index:99;transition:opacity .7s,visibility .7s}
+#loader img{width:110px;border-radius:50%;animation:pulse 1.4s ease-in-out infinite}
+#loader.off{opacity:0;visibility:hidden}
+@keyframes pulse{50%{transform:scale(1.08);opacity:.7}}
+/* nav */
+nav{position:fixed;inset:0 0 auto;z-index:50;transition:.4s;padding:14px 0}
+nav.s{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:8px 0}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Cormorant Garamond',serif;font-size:22px}
+.brand img{width:46px;height:46px;border-radius:50%;background:#fff;padding:2px;box-shadow:0 2px 12px rgba(130,119,124,.25)}
+.links{display:flex;gap:26px;font-size:14px;letter-spacing:.06em}
+.links a{position:relative;padding:4px 0}.links a:after{content:"";position:absolute;inset:auto 0 0;height:1px;background:var(--mu);transform:scaleX(0);transition:transform .4s var(--ease)}
+.links a:hover:after{transform:scaleX(1)}
+.tools{display:flex;gap:8px;align-items:center}
+.tools button,.burger{background:none;border:1px solid var(--line);color:var(--tx);border-radius:30px;min-width:38px;height:38px;cursor:pointer;font:inherit;font-size:13px;padding:0 12px;transition:.3s}
+.tools button:hover{background:var(--bg3)}.tools button.on{background:var(--bg3)}
+.burger{display:none}
+/* hero */
+.hero{min-height:100vh;display:grid;align-items:center;padding:130px 0 70px;background:radial-gradient(circle at 80% 20%,var(--bg3),transparent 55%),radial-gradient(circle at 10% 90%,var(--bg2),transparent 50%)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(46px,7.5vw,96px);margin-bottom:22px}.hero h1 em{font-style:italic;color:var(--mu)}
+.hero p{max-width:460px;color:var(--mu);margin-bottom:34px}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:40px;border:1px solid var(--mu);font:400 14px Jost,Tajawal;letter-spacing:.1em;cursor:pointer;transition:.4s var(--ease);background:var(--mu);color:#fff}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(130,119,124,.3)}.btn:active{transform:scale(.96)}
+.btn.o{background:transparent;color:var(--tx)}
+.arch{position:relative;aspect-ratio:3/4;border-radius:999px 999px 24px 24px;background:linear-gradient(160deg,var(--bg3),var(--bg2));display:grid;place-items:center;overflow:hidden;animation:float 7s ease-in-out infinite}
+.arch:before{content:"";position:absolute;inset:14px;border:1px solid var(--gold);border-radius:999px 999px 12px 12px;opacity:.55}
+.arch img{width:68%;border-radius:50%;background:#fff;padding:6px;box-shadow:0 20px 50px rgba(130,119,124,.3)}
+@keyframes float{50%{transform:translateY(-12px)}}
+.in{opacity:0;transform:translateY(26px);animation:up 1s var(--ease) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}.rv.v{opacity:1;transform:none}
+/* about */
+.about .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}
+.about .big{font:italic 400 clamp(90px,16vw,200px)/1 'Cormorant Garamond',serif;color:var(--bg3);text-align:center}
+.about p{color:var(--mu);max-width:560px}
+/* services */
+.svc{background:var(--bg2)}
+.acc{border-top:1px solid var(--line);max-width:860px}
+.acc-i{border-bottom:1px solid var(--line)}
+.acc-h{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;color:var(--tx);cursor:pointer;padding:24px 4px;font:400 clamp(24px,3.4vw,34px) 'Cormorant Garamond',serif;text-align:start;transition:padding .4s var(--ease),color .3s}
+.acc-h:hover{padding-inline-start:16px;color:var(--mu)}
+.acc-h i{position:relative;width:20px;height:20px;flex:none}
+.acc-h i:before,.acc-h i:after{content:"";position:absolute;background:var(--mu);inset:9px 0 auto;height:1px;transition:transform .45s var(--ease)}
+.acc-h i:after{transform:rotate(90deg)}.acc-i.open .acc-h i:after{transform:rotate(0)}
+.acc-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}.acc-i.open .acc-b{grid-template-rows:1fr}
+.acc-b>div{overflow:hidden}
+.row{display:flex;align-items:baseline;gap:12px;padding:9px 4px}
+.row:before{content:"";order:1;flex:1;border-bottom:1px dotted var(--mu);opacity:.5;transform:translateY(-4px)}
+.row span:first-child{order:0}.row b{order:2;font-weight:500;white-space:nowrap}.row small{color:var(--mu);font-size:12px}
+.acc-b>div>div{padding-bottom:20px}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:150px;gap:14px}
+.gal figure{border-radius:18px;overflow:hidden;background:linear-gradient(140deg,var(--bg3),var(--bg2));position:relative}
+.gal figure:nth-child(1){grid-column:span 3;grid-row:span 2}.gal figure:nth-child(2){grid-column:span 3}.gal figure:nth-child(3),.gal figure:nth-child(4){grid-column:span 3/span 1}
+.gal figure:nth-child(3){grid-column:span 2}.gal figure:nth-child(4){grid-column:span 1}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}.gal figure:hover img{transform:scale(1.07)}
+.note{color:var(--mu);font-size:13px;margin-top:16px}
+/* booking */
+.book{background:linear-gradient(180deg,var(--bg),var(--bg3))}
+.bk{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px}
+form{background:var(--card);padding:36px;border-radius:26px;box-shadow:0 24px 60px rgba(130,119,124,.15);display:grid;gap:16px;position:relative}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);display:grid;gap:6px}
+input,select,textarea{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;transition:border .3s,box-shadow .3s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--mu);box-shadow:0 0 0 4px rgba(130,119,124,.15)}
+.msg{font-size:14px;min-height:20px}.msg.e{color:#b3475b}
+.ok{position:absolute;inset:0;background:var(--card);border-radius:26px;display:grid;place-content:center;text-align:center;gap:10px;padding:30px;opacity:0;visibility:hidden;transition:.5s}
+.ok.show{opacity:1;visibility:visible}
+.ok svg{width:84px;margin:auto}.ok circle,.ok path{fill:none;stroke:var(--mu);stroke-width:2;stroke-dasharray:200;stroke-dashoffset:200}
+.ok.show circle{animation:dr 1s forwards}.ok.show path{animation:dr .7s .6s forwards}@keyframes dr{to{stroke-dashoffset:0}}
+/* contact+footer */
+.ct{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.ic{display:inline-flex;gap:10px;align-items:center;padding:12px 22px;border:1px solid var(--line);border-radius:40px;transition:.4s var(--ease);background:var(--card)}.ic:hover{transform:translateY(-3px);background:var(--bg3)}
+.ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6}
+footer{background:var(--bg3);padding:50px 0;text-align:center;color:var(--mu);font-size:14px}
+footer img{width:70px;border-radius:50%;background:#fff;padding:3px;margin-bottom:12px}
+footer .gl{width:60px;height:1px;background:var(--gold);margin:16px auto}
+.fab{position:fixed;inset:auto 18px 18px auto;z-index:40;display:grid;gap:10px}
+[dir=rtl] .fab{inset:auto auto 18px 18px}
+.fab a{width:48px;height:48px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 8px 22px rgba(0,0,0,.12);transition:.3s}.fab a:hover{transform:scale(1.1)}
+.fab svg{width:20px;height:20px;fill:none;stroke:var(--tx);stroke-width:1.6}
+@media(max-width:860px){section{padding:76px 0}.hero .wrap,.about .wrap,.bk{grid-template-columns:1fr;gap:36px}.arch{max-width:300px;margin:auto}.about .big{display:none}
+.burger{display:block}.links{position:absolute;inset:100% 0 auto;background:var(--bg);flex-direction:column;padding:20px 24px;gap:14px;border-bottom:1px solid var(--line);display:none}.links.o{display:flex}
+.two{grid-template-columns:1fr}.gal{grid-template-columns:1fr 1fr;grid-auto-rows:130px}.gal figure:nth-child(n){grid-column:span 1;grid-row:span 1}.gal figure:nth-child(1){grid-column:span 2;grid-row:span 2}form{padding:24px}.brand span{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.in{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="loader" aria-hidden="true"><img src="logo.png" alt=""></div>
+<nav id="nav"><div class="wrap">
+<a href="#top" class="brand"><img src="logo.png" alt="Salon de Beauté KB"><span>Salon de Beauty</span></a>
+<div class="links" id="links"><a href="#about" data-t="n1"></a><a href="#services" data-t="n2"></a><a href="#book" data-t="n4"></a><a href="#contact" data-t="n5"></a></div>
+<div class="tools"><button data-l="fr">FR</button><button data-l="en">EN</button><button data-l="ar">عربي</button><button id="th" aria-label="Light / Dark">◐</button><button class="burger" id="bg" aria-label="Menu">☰</button></div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+<div><div class="eyebrow in" style="animation-delay:.2s" data-t="h0"></div>
+<h1 class="in" style="animation-delay:.4s" data-th="h1"></h1>
+<p class="in" style="animation-delay:.6s" data-t="h2"></p>
+<div class="btns in" style="animation-delay:.8s"><a class="btn" href="#book" data-t="h3"></a><a class="btn o" href="tel:+213659254813">0659 25 48 13</a></div></div>
+<div class="arch in" style="animation-delay:.5s"><img src="logo.png" alt="Logo Salon de Beauté KB"></div>
+</div></header>
+
+<section class="about" id="about"><div class="wrap">
+<div class="big rv" aria-hidden="true">KB</div>
+<div class="rv"><div class="eyebrow" data-t="n1"></div><h2 data-th="a1"></h2><p data-t="a2"></p></div>
+</div></section>
+
+<section class="svc" id="services"><div class="wrap">
+<div class="rv"><div class="eyebrow" data-t="n2"></div><h2 data-th="s1"></h2></div>
+<div class="acc rv" id="acc"></div>
+</div></section>
+
+<section class="book" id="book"><div class="wrap bk">
+<div class="rv"><div class="eyebrow" data-t="n4"></div><h2 data-th="b1"></h2><p style="color:var(--mu);max-width:380px" data-t="b2"></p></div>
+<form id="f" class="rv" novalidate>
+<label><span data-t="f1"></span><input name="n" required maxlength="80" autocomplete="name"></label>
+<div class="two"><label><span data-t="f2"></span><input name="p" type="tel" required maxlength="20" inputmode="tel" autocomplete="tel"></label>
+<label><span data-t="f3"></span><select name="s" id="sel" required></select></label></div>
+<div class="two"><label><span data-t="f4"></span><input name="d" type="date" required id="dt"></label>
+<label><span data-t="f5"></span><select name="t" id="tm" required></select></label></div>
+<label><span data-t="f6"></span><textarea name="o" rows="3" maxlength="500"></textarea></label>
+<button class="btn" id="sb" data-t="f7"></button><div class="msg" id="ms" role="status"></div>
+<div class="ok" id="ok"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="32"/><path d="M26 41l10 10 19-21"/></svg><h3 data-t="k1"></h3><p style="color:var(--mu)" data-t="k2"></p></div>
+</form>
+</div></section>
+
+<section id="contact"><div class="wrap rv">
+<div class="eyebrow" data-t="n5"></div><h2 data-th="c1"></h2>
+<p style="color:var(--mu)">📍 Tassoust, Jijel, Algeria · <span data-t="c2"></span></p>
+<div class="ct">
+<a class="ic" href="tel:+213659254813"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>0659 25 48 13</a>
+<a class="ic" href="https://wa.me/213659254813" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M3 21l1.6-4.8A8.5 8.5 0 1112 20.5a8.5 8.5 0 01-4-1z"/></svg>WhatsApp</a>
+<a class="ic" href="https://www.instagram.com/salondebeautekb/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>Instagram</a>
+</div></div></section>
+
+<footer><img src="logo.png" alt=""><div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--tx)">Salon de Beauty</div><div class="gl"></div>
+<div>Tassoust, Jijel · 0659 25 48 13 · <a href="https://www.instagram.com/salondebeautekb/" rel="noopener">@salondebeautekb</a></div><div style="margin-top:8px">© <span id="yr"></span> Salon de Beauty</div></footer>
+<div class="fab"><a href="tel:+213659254813" aria-label="Call"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></a><a href="https://wa.me/213659254813" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M3 21l1.6-4.8A8.5 8.5 0 1112 20.5a8.5 8.5 0 01-4-1z"/></svg></a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SB_URL='YOUR_SUPABASE_URL', SB_KEY='YOUR_SUPABASE_ANON_KEY';
+const sb=SB_URL.startsWith('https')&&window.supabase?supabase.createClient(SB_URL,SB_KEY):null;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const T={
+fr:{n1:'Le salon',n2:'Services',n4:'Réserver',n5:'Contact',h0:'Tassoust · Jijel',h1:'L’art de <em>sublimer</em> votre beauté',h2:'Soins du visage, regard, cheveux et pieds : un moment doux, rien que pour vous.',h3:'Prendre rendez-vous',a1:'Un lieu pensé <em>pour vous</em>',a2:'Chez Salon de Beauty, chaque soin est réalisé avec attention et douceur. Notre équipe vous accueille dans une ambiance apaisante pour révéler votre beauté naturelle.',s1:'Nos <em>services</em> & tarifs',from:'à partir de',b1:'Réservez votre <em>moment</em>',b2:'Envoyez votre demande : le rendez-vous est confirmé uniquement après validation du salon.',f1:'Nom complet',f2:'Téléphone',f3:'Service',f4:'Date',f5:'Heure',f6:'Notes (facultatif)',f7:'Envoyer la demande',ch:'Choisir…',k1:'Demande envoyée',k2:'Votre rendez-vous sera confirmé après validation par le salon.',er:'Veuillez remplir tous les champs correctement.',er2:'Envoi impossible. Appelez-nous ou écrivez sur WhatsApp.',sen:'Envoi…',c1:'Nous <em>contacter</em>',c2:'Appel, WhatsApp ou Instagram'},
+en:{n1:'The salon',n2:'Services',n4:'Book',n5:'Contact',h0:'Tassoust · Jijel',h1:'The art of <em>enhancing</em> your beauty',h2:'Facial, lash, hair and foot care: a gentle moment, just for you.',h3:'Book an appointment',a1:'A place made <em>for you</em>',a2:'At Salon de Beauty every treatment is done with care and gentleness. Our team welcomes you in a calm atmosphere to reveal your natural beauty.',s1:'Our <em>services</em> & prices',from:'from',b1:'Book your <em>moment</em>',b2:'Send your request: the appointment is confirmed only after the salon approves it.',f1:'Full name',f2:'Phone',f3:'Service',f4:'Date',f5:'Time',f6:'Notes (optional)',f7:'Send request',ch:'Choose…',k1:'Request sent',k2:'Your appointment will be confirmed once the salon approves it.',er:'Please fill in all fields correctly.',er2:'Could not send. Please call us or use WhatsApp.',sen:'Sending…',c1:'Get in <em>touch</em>',c2:'Call, WhatsApp or Instagram'},
+ar:{n1:'الصالون',n2:'الخدمات',n4:'احجزي',n5:'تواصل',h0:'تاسوست · جيجل',h1:'فنّ إبراز <em>جمالك</em>',h2:'عناية بالبشرة والرموش والشعر والقدمين: لحظة هادئة لكِ وحدك.',h3:'احجزي موعدك',a1:'مكان صُمّم <em>لأجلك</em>',a2:'في Salon de Beauty يُنجَز كل علاج بعناية ولطف. فريقنا يستقبلك في أجواء هادئة لإبراز جمالك الطبيعي.',s1:'خدماتنا <em>وأسعارنا</em>',from:'ابتداءً من',b1:'احجزي <em>موعدك</em>',b2:'أرسلي طلبك: لا يُعتبر الموعد مؤكداً إلا بعد موافقة الصالون.',f1:'الاسم الكامل',f2:'الهاتف',f3:'الخدمة',f4:'التاريخ',f5:'الوقت',f6:'ملاحظات (اختياري)',f7:'إرسال الطلب',ch:'اختاري…',k1:'تم إرسال الطلب',k2:'سيتم تأكيد موعدك بعد موافقة الصالون.',er:'يرجى ملء جميع الحقول بشكل صحيح.',er2:'تعذّر الإرسال. اتصلي بنا أو راسلينا عبر واتساب.',sen:'جارٍ الإرسال…',c1:'<em>تواصلي</em> معنا',c2:'اتصال أو واتساب أو إنستغرام'}};
+const S=[['Nettoyage de peau',[['Simple',1500],['Moyenne',2500],['Profond',3500]]],
+['Hydrafacial',[['Hydrafacial',5500],['Spécial',6500]]],
+['Brow Lift',[['Brow lift',1500],['Avec tentures',2500]]],
+['Rehossment',[['Rehossment',1800],['Avec tenteur',2500]]],
+['Extension de cils',[['Naturel',2500],['Naturel chargé',3000],['Méga volume',3500],['Méga russe',4000],['Biche',4500]]],
+['Soins capillaires',[['Protéines',5000,1],['Filmer',4000,1],['Botox',6000,1],['Lissage brésilien',7000,1],['Kiratine',6000,1]]],
+['Soin pied',[['Simple',2500],['Péling russe',3500],['Avec parafine',4000]]],
+['Autres soins',[['BB lips',8000],['Micronedling',5000],['Microblading',10000],['Microshading',12000]]],
+['Soins des sourcils',[['تشقير الحواجب',1000],['ترتيب الحواجب',800],['صبغة الحواجب',800]]]];
+let L=localStorage.getItem('l')||'fr';
+const fmt=n=>n.toLocaleString('fr-FR').replace(/\u202f/g,' ')+' DA';
+function renderAcc(){const open=$$('.acc-i.open').map(e=>e.dataset.i);
+$('#acc').innerHTML=S.map((c,i)=>`<div class="acc-i${open.includes(i+'')?' open':''}" data-i="${i}"><button class="acc-h" aria-expanded="${open.includes(i+'')}" aria-controls="p${i}">${c[0]}<i></i></button><div class="acc-b" id="p${i}"><div><div>${c[1].map(s=>`<div class="row"><span dir="auto">${s[0]}</span><b>${s[2]?`<small>${T[L].from}</small> `:''}${fmt(s[1])}</b></div>`).join('')}</div></div></div></div>`).join('');}
+$('#acc').addEventListener('click',e=>{const h=e.target.closest('.acc-h');if(!h)return;const it=h.parentElement;it.classList.toggle('open');h.setAttribute('aria-expanded',it.classList.contains('open'))});
+function renderSel(){const v=$('#sel').value;$('#sel').innerHTML=`<option value="">${T[L].ch}</option>`+S.map(c=>`<optgroup label="${c[0]}">${c[1].map(s=>`<option value="${c[0]} — ${s[0]}">${s[0]}</option>`).join('')}</optgroup>`).join('');$('#sel').value=v;
+const t=$('#tm').value;$('#tm').innerHTML=`<option value="">${T[L].ch}</option>`+Array.from({length:19},(_,i)=>{const m=10*60+i*30,h=String(m/60|0).padStart(2,'0')+':'+(m%60?'30':'00');return`<option>${h}</option>`}).join('');$('#tm').value=t}
+function setLang(l){L=l;localStorage.setItem('l',l);document.documentElement.lang=l;document.documentElement.dir=l=='ar'?'rtl':'ltr';
+$$('[data-t]').forEach(e=>e.textContent=T[l][e.dataset.t]);$$('[data-th]').forEach(e=>e.innerHTML=T[l][e.dataset.th]);
+$$('[data-l]').forEach(b=>b.classList.toggle('on',b.dataset.l==l));renderAcc();renderSel()}
+$$('[data-l]').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+function setTheme(t){document.documentElement.dataset.theme=t;localStorage.setItem('th',t)}
+setTheme(localStorage.getItem('th')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+$('#th').onclick=()=>setTheme(document.documentElement.dataset.theme=='dark'?'light':'dark');
+$('#bg').onclick=()=>$('#links').classList.toggle('o');$('#links').onclick=()=>$('#links').classList.remove('o');
+addEventListener('scroll',()=>$('#nav').classList.toggle('s',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.12});$$('.rv').forEach(e=>io.observe(e));
+$('#yr').textContent=new Date().getFullYear();
+const d=new Date();$('#dt').min=d.toISOString().slice(0,10);
+$('#f').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=$('#ms'),v=n=>f[n].value.trim();m.className='msg';
+if(!v('n')||!/^[0-9+\s]{8,16}$/.test(v('p'))||!v('s')||!v('d')||!v('t')){m.textContent=T[L].er;m.className='msg e';return}
+if(!sb){m.textContent=T[L].er2;m.className='msg e';return}
+$('#sb').disabled=true;m.textContent=T[L].sen;
+const {error}=await sb.from('bookings').insert({customer_name:v('n'),phone:v('p'),service:v('s'),booking_date:v('d'),booking_time:v('t'),notes:v('o')||null,lang:L});
+$('#sb').disabled=false;
+if(error){m.textContent=T[L].er2;m.className='msg e';return}
+m.textContent='';$('#ok').classList.add('show');f.reset();setTimeout(()=>$('#ok').classList.remove('show'),6000)});
+setLang(L);addEventListener('load',()=>setTimeout(()=>$('#loader').classList.add('off'),400));
+</script>
+</body>
+</html>

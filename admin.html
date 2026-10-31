@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Admin — Salon de Beauty</title><link rel="icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FDFBFA;--bg2:#F4E9E8;--bg3:#E8DDE5;--tx:#4a4146;--mu:#82777C;--card:#fff;--line:rgba(130,119,124,.25);--gold:#C9A400}
+[data-theme=dark]{--bg:#1d1a1e;--bg2:#27222a;--bg3:#322a37;--tx:#f1e8ec;--mu:#b9acb2;--card:#2a252d;--line:rgba(232,221,229,.18)}
+*{box-sizing:border-box;margin:0}body{background:linear-gradient(160deg,var(--bg),var(--bg3));min-height:100vh;color:var(--tx);font:300 15px/1.6 Jost,sans-serif}
+h1,h2{font-family:'Cormorant Garamond',serif;font-weight:400}
+.wrap{max-width:1000px;margin:auto;padding:24px}
+.card{background:var(--card);border-radius:22px;padding:28px;box-shadow:0 20px 50px rgba(130,119,124,.15)}
+input,select{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:11px 14px;width:100%}
+button{font:400 13px Jost;border:1px solid var(--mu);background:var(--mu);color:#fff;border-radius:30px;padding:9px 18px;cursor:pointer;transition:.3s}button:hover{transform:translateY(-2px)}button:active{transform:scale(.95)}
+button.o{background:none;color:var(--tx)}button.r{background:none;color:#b3475b;border-color:#b3475b}
+#lg{max-width:380px;margin:12vh auto;display:grid;gap:14px;text-align:center}#lg img{width:90px;margin:auto;border-radius:50%;background:#fff;padding:3px}
+#app{display:none}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;gap:12px;flex-wrap:wrap}
+header div{display:flex;align-items:center;gap:12px}header img{width:48px;border-radius:50%;background:#fff;padding:2px}
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.st div{background:var(--card);border-radius:18px;padding:16px;text-align:center}.st b{display:block;font:400 34px 'Cormorant Garamond',serif}.st span{color:var(--mu);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.fl{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:18px}
+.b{background:var(--card);border-radius:18px;padding:18px;margin-bottom:12px;display:grid;grid-template-columns:1fr auto;gap:10px;border-inline-start:4px solid var(--mu)}
+.b.Pending{border-color:var(--gold)}.b.Confirmed{border-color:#6b9a7e}.b.Cancelled{border-color:#b3475b;opacity:.75}
+.b small{color:var(--mu)}.tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:2px 10px;border-radius:20px;background:var(--bg3)}.ac{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start}
+#er{color:#b3475b;min-height:22px}@media(max-width:700px){.st{grid-template-columns:1fr 1fr}.fl,.b{grid-template-columns:1fr}}
+</style></head><body>
+<div id="lg" class="card"><img src="logo.png" alt=""><h1>Administration</h1>
+<input id="em" type="email" placeholder="Email" autocomplete="username"><input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password">
+<button id="go">Connexion</button><div id="er" role="alert"></div></div>
+<div id="app" class="wrap"><header><div><img src="logo.png" alt=""><h1>Réservations</h1></div><div><button class="o" id="th">◐</button><button class="o" id="lo">Déconnexion</button></div></header>
+<div class="st"><div><b id="s0">0</b><span>Total</span></div><div><b id="s1">0</b><span>Pending</span></div><div><b id="s2">0</b><span>Confirmed</span></div><div><b id="s3">0</b><span>Cancelled</span></div></div>
+<div class="fl"><input id="q" placeholder="Rechercher (nom, téléphone, service)…"><select id="fs"><option value="">Tous les statuts</option><option>Pending</option><option>Confirmed</option><option>Cancelled</option></select></div>
+<div id="ls"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SB_URL='YOUR_SUPABASE_URL', SB_KEY='YOUR_SUPABASE_ANON_KEY';
+const sb=supabase.createClient(SB_URL,SB_KEY);const $=s=>document.querySelector(s);let D=[];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+document.documentElement.dataset.theme=localStorage.getItem('th')||'light';
+$('#th').onclick=()=>{const t=document.documentElement.dataset.theme=='dark'?'light':'dark';document.documentElement.dataset.theme=t;localStorage.setItem('th',t)};
+async function load(){const{data,error}=await sb.from('bookings').select('*').order('created_at',{ascending:false});if(error){alert(error.message);return}D=data;draw()}
+function draw(){const q=$('#q').value.toLowerCase(),f=$('#fs').value;
+['','Pending','Confirmed','Cancelled'].forEach((s,i)=>$('#s'+i).textContent=D.filter(b=>!s||b.status==s).length);
+const r=D.filter(b=>(!f||b.status==f)&&(`${b.customer_name} ${b.phone} ${b.service}`).toLowerCase().includes(q));
+$('#ls').innerHTML=r.length?r.map(b=>`<div class="b ${b.status}"><div><b>${esc(b.customer_name)}</b> <span class="tag">${b.status}</span><br><a href="tel:${esc(b.phone)}">${esc(b.phone)}</a> · ${esc(b.service)}<br><small>📅 ${esc(b.booking_date)} ${esc(b.booking_time).slice(0,5)}${b.notes?' · '+esc(b.notes):''}<br>Reçu : ${new Date(b.created_at).toLocaleString('fr-FR')}</small></div>
+<div class="ac"><button data-a="Confirmed" data-id="${b.id}">Confirmer</button><button class="o" data-a="Cancelled" data-id="${b.id}">Annuler</button><button class="r" data-a="del" data-id="${b.id}">Supprimer</button></div></div>`).join(''):'<div class="card">Aucune réservation.</div>'}
+$('#ls').onclick=async e=>{const a=e.target.dataset.a,id=e.target.dataset.id;if(!a)return;
+if(a=='del'){if(!confirm('Supprimer définitivement ?'))return;await sb.from('bookings').delete().eq('id',id)}else await sb.from('bookings').update({status:a}).eq('id',id);load()};
+$('#q').oninput=draw;$('#fs').onchange=draw;
+async function gate(){const{data:{session}}=await sb.auth.getSession();$('#lg').style.display=session?'none':'grid';$('#app').style.display=session?'block':'none';if(session){load();sb.channel('b').on('postgres_changes',{event:'*',schema:'public',table:'bookings'},load).subscribe()}}
+$('#go').onclick=async()=>{const{error}=await sb.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#pw').value});$('#er').textContent=error?'Identifiants incorrects.':'';if(!error)gate()};
+$('#pw').onkeydown=e=>e.key=='Enter'&&$('#go').click();
+$('#lo').onclick=async()=>{await sb.auth.signOut();location.reload()};gate();
+</script></body></html>
